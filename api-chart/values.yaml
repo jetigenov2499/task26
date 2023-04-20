@@ -4,8 +4,8 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 aws:
-  accessKeyId: "AKIAR4EFLWRUK6OFPUEQ"
-  secretAccessKey: "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"
+  accessKeyId: AWS_ACCESS_KEY_ID
+  secretAccessKey: AWS_SECRET_ACCESS_KEY
 service:
   type: NodePort
   port: 8080
