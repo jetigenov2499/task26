@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: jetigenov2455/postgres
-  tag: {{ .Values.image.tag }}
+  tag: ${{ github.sha }}
 
 postgresUser: postgres
 postgresPassword: password
