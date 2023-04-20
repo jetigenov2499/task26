@@ -6,8 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile.api
     environment:
-      AWS_ACCESS_KEY_ID: AKIAR4EFLWRUK6OFPUEQ
-      AWS_SECRET_ACCESS_KEY: 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
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
     ports:
       - "8080:8080"
     depends_on:
