@@ -22,21 +22,24 @@ jobs:
     - name: Build and push API image
       uses: docker/build-push-action@v2
       with:
-        context: ./Dockerfile.api
+        context: .
+        file: ./Dockerfile.api
         push: true
         tags: jetigenov2455/api:${{ github.sha }}
 
     - name: Build and push Webui image
       uses: docker/build-push-action@v2
       with:
-        context: ./Dockerfile.webui
+        context: .
+        file: ./Dockerfile.webui
         push: true
         tags: jetigenov2455/webui:${{ github.sha }}
 
     - name: Build and push DB image
       uses: docker/build-push-action@v2
       with:
-        context: ./Dockerfile.db
+        context: .
+        file: ./Dockerfile.db
         push: true
         tags: jetigenov2455/postgres:${{ github.sha }}
 
