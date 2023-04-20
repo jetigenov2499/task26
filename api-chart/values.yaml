@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: jetigenov2455/api
-  tag: latest
+  tag: {{ .Values.image.tag }}
   pullPolicy: IfNotPresent
 aws:
   accessKeyId: AWS_ACCESS_KEY_ID
