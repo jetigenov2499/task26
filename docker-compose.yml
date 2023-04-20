@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    environment:
+      AWS_ACCESS_KEY_ID: AKIAR4EFLWRUK6OFPUEQ
+      AWS_SECRET_ACCESS_KEY: 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
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dbec
+  webui:
+    build:
+      context: .
+      dockerfile: Dockerfile.webui
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+  dbec:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dbec2
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

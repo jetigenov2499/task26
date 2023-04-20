@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EC2 Instance</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<script>
+  const apiUrl = 'http://127.0.0.1:8080';
+  $(document).ready(function() {
+    refreshInstancesTable();
+
+    $('#create-instance-form').submit(function(event) {
+      event.preventDefault();
+      $.post(apiUrl + '/api/ec2/create', function(data) {
+        refreshInstancesTable();
+      });
+    });
+  });
+
+  function refreshInstancesTable() {
+    $.get(apiUrl + '/api/ec2/list', function(data) {
+      var instancesTable = $('#instances-table tbody');
+      instancesTable.empty();
+      $.each(data, function(index, instanceId) {
+        var row = $('<tr>');
+        row.append($('<td>').text(instanceId));
+        row.append($('<td>').html('<button class="btn btn-danger" onclick="terminateInstance(\'' + instanceId + '\')">Delete</button>'));
+        instancesTable.append(row);
+      });
+    });
+  }
+
+  function terminateInstance(instanceId) {
+   fetch(`${apiUrl}/api/ec2/terminate`, {
+   method: 'POST',
+    body: JSON.stringify({ instanceId }),
+    
+  })
+   .then(response => response.json())
+   .then(data => {
+   if (data.terminated) {
+     refreshInstancesTable();
+   } else {
+     alert('Failed to terminate instance');
+   }
+   })
+   .catch(() => alert('Failed to terminate instance'));
+}
+
+</script>
+<body>
+	<h1>EC2 Instance</h1>
+	<form id="create-instance-form">
+		<button>Create EC2 Instance</button>
+	</form>
+	<table id="instances-table">
+		<thead>
+			<tr>
+				<th>Instance ID</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</body>
+</html>

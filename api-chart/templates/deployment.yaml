@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "api-chart.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "api-chart.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "api-chart.name" . }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        env:
+          - name: AWS_ACCESS_KEY_ID
+            value: {{ .Values.aws.accessKeyId }}
+          - name: AWS_SECRET_ACCESS_KEY
+            value: {{ .Values.aws.secretAccessKey }}
+        ports:
+        - containerPort: 8080

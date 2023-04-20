@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "database-chart.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "database-chart.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "database-chart.name" . }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        env:
+        - name: POSTGRES_USER
+          value: {{ .Values.postgresUser }}
+        - name: POSTGRES_PASSWORD
+          value: {{ .Values.postgresPassword }}
+        - name: POSTGRES_DB
+          value: {{ .Values.postgresDb }}
+        ports:
+        - containerPort: {{ .Values.containerPort }}
+        volumeMounts:
+        - name: database-persistent-storage
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: database-persistent-storage
+        persistentVolumeClaim:
+          claimName: database-pvc

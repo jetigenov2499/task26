@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: jetigenov2455/webui
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  type: NodePort
+  port: 80

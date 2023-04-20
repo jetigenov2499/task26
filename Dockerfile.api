@@ -1,0 +1,9 @@
+FROM golang:alpine
+
+WORKDIR /app
+
+COPY ./webui/ .
+
+RUN go build -o main main.go
+
+CMD ["./main"]

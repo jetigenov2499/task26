@@ -1,0 +1,12 @@
+replicaCount: 1
+
+image:
+  repository: jetigenov2455/postgres
+  tag: latest
+
+postgresUser: postgres
+postgresPassword: password
+postgresDb: dbec2
+
+containerPort: 5432
+servicePort: 5432

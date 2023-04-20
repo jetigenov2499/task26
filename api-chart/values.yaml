@@ -1,0 +1,11 @@
+replicaCount: 1
+image:
+  repository: jetigenov2455/api
+  tag: latest
+  pullPolicy: IfNotPresent
+aws:
+  accessKeyId: "AKIAR4EFLWRUK6OFPUEQ"
+  secretAccessKey: "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"
+service:
+  type: NodePort
+  port: 8080
