@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: jetigenov2455/webui
-  tag: {{ .Values.image.tag }}
+  tag: ${{ github.sha }}
   pullPolicy: IfNotPresent
 service:
   type: NodePort
