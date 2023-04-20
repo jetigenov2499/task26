@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: jetigenov2455/postgres
-  tag: latest
+  tag: {{ .Values.image.tag }}
 
 postgresUser: postgres
 postgresPassword: password
